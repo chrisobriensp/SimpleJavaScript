@@ -7,19 +7,21 @@ var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 
 // starting to integrate jsx/babel as well as typescript..
-gulp.task("scripts", function () {
-  return gulp.src("src/**/*.js")
-    .pipe(sourcemaps.init())
-    .pipe(babel())
-    .pipe(concat("all.js"))
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest("dist"));
-});
 
-/*
--- just deals with typescript files..
+//gulp.task("scripts", function () {
+//    return gulp.src("src/**/*.js")
+//    .pipe(sourcemaps.init())
+//    .pipe(babel())
+//    .pipe(concat("all.js"))
+//    .pipe(sourcemaps.write("."))
+//    .pipe(gulp.dest("dist"));
+//});
+
+
+//-- just deals with typescript files..
 gulp.task('scripts', function() {
-  var tsResult = gulp.src('*.ts')
+  //var tsResult = gulp.src('scripts/**/*.ts')
+  var tsResult = gulp.src(['scripts/**/!(core)*.ts', 'scripts/core.ts'])
     .pipe(ts({
         declarationFiles: true,
         noExternalResolve: true,
@@ -32,7 +34,7 @@ gulp.task('scripts', function() {
     tsResult.js.pipe(gulp.dest('release/js'))
     ]);
 });
-*/
+
 
 gulp.task('sass', function () {
   gulp.src('*.scss')
@@ -42,5 +44,5 @@ gulp.task('sass', function () {
  
 gulp.task('watch', function () {
   gulp.watch('*.scss', ['sass']);
-  gulp.watch('*.ts', ['scripts']);
+  gulp.watch('scripts/**/*.ts', ['scripts']);
 });
