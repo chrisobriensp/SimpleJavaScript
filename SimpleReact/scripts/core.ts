@@ -11,7 +11,11 @@
 
     jQuery('#container').text('bar');
     
-    
+    var spData = new SPData('someUrl');
+    var jsonData : string = spData.GetData(10);
+   // jsonData = `{"test":"test11"}`;
+    var foo = JSON.parse(jsonData);
+    console.log('Parsed list data..');
 })();
 
 
